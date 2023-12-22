@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Menu  from './componets/Menu';
+import '../src/componets/Home.css'
+import Item from './Item';
 
-function App() {
+const App = () => {
+  const [cardData,setcardData] = useState(Item)
+
+const filterItem =(category)=>{
+  const updatelist =Item.filter((curElem)=>{
+    return curElem.category === category;
+  });
+  setcardData(updatelist);
+
+};
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+ <>
+ <nav className='navbar'>
+  <div className='btn-group'>
+    <button className='btn-group__item' onClick={()=>filterItem("breakfast")}>breakfast</button>
+    <button className='btn-group__item'onClick={()=>filterItem("lunch")}> lunch</button>
+    <button className='btn-group__item' onClick={()=>filterItem("evening")}>evening</button>
+    <button className='btn-group__item' onClick={()=>filterItem("dinner")}>dinner</button>
+    <button className='btn-group__item' onClick={()=>setcardData(Item)}>all</button>
+  </div>
+ </nav>
+ <Menu  cardData={cardData}/>  
+ </>
+
+
+
+
+  )
 }
 
-export default App;
+export default App
